@@ -9,6 +9,11 @@ padding: 1em;
 `
 export const DivButtons = styled.div`
 text-decoration: none;
+display: flex;
+width:11em;
+flex-direction: row;
+justify-content: space-between;
+margin-top:0.5em;
 `
 export const DivBooks = styled.div`
 background-color: black;
@@ -17,7 +22,7 @@ border-radius: 1em;
 display: flex;
 margin-left:2em;
 flex-direction: column;
-justify-content: space-around;
+justify-content: space-between;
 height: auto;
 padding-bottom:1em;
 padding-left:1em;

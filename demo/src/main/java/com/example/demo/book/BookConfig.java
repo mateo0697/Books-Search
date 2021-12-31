@@ -18,7 +18,7 @@ public class BookConfig {
                     "Book 1",
                     "Mateo Paluci",
                     "150",
-                    "2008-3-12"
+                    "12-3-2008"
 
             );
 
@@ -26,7 +26,7 @@ public class BookConfig {
                     "Book 2",
                     "Sondeos",
                     "200",
-                    "2034-5-23"
+                    "21-5-2034"
             );
             repository.saveAll(
                     List.of(first,second)

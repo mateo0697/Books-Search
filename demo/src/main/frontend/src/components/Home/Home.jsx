@@ -15,26 +15,27 @@ function Home() {
     await deleteBook(id)
     dispatch(getBooks())
   }
+
   return (
     <>
     <Link to="/addbook">Add New Book</Link>
     <DivHome>
-    {prueba.map(book => {
-     return (
-       <DivBooks>
-        <DivButtons>
-          <Link style={{textDecoration:"none", color:"black"}} to={`/editbook/${book.id}`}>Edit</Link>
-          <button onClick={()=>deleteB(book.id)}>Delete</button>
-        </DivButtons>
-        <div style={{marginTop:"0.5em"}}>
-          <div key={book.id}>Title: {book.title}</div>
-          <div key={book.id}>Author: {book.author}</div>
-          <div key={book.id}>Price: {book.price}</div>
-          <div key={book.id}>Date of Publication: {book.write}</div>
-        </div>
-       </DivBooks>
-     )
-    })}
+      {prueba.map(book => {
+           return (
+             <DivBooks key={book.id}>
+              <DivButtons>
+                <Link style={{textDecoration:"none", color:"black", backgroundColor:"white", border:"solid", borderRadius:"1em", borderColor:"black", paddingTop:"0.25em", paddingBottom:"0.25em", paddingLeft:"0.5em", paddingRight:"0.5em"}} to={`/editbook/${book.id}`}>Edit</Link>
+                <button style={{textDecoration:"none", color:"black", backgroundColor:"white", border:"solid", borderRadius:"1em", borderColor:"black"}}onClick={()=>deleteB(book.id)}>Delete</button>
+              </DivButtons>
+              <div style={{marginTop:"0.5em"}}>
+                <div>Title: {book.title}</div>
+                <div>Author: {book.author}</div>
+                <div>Price: {book.price}</div>
+                <div>Date of Publication: {book.write}</div>
+              </div>
+             </DivBooks>
+           )
+          })}
     </DivHome>
     </>
   );

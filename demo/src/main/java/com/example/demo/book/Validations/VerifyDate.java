@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface VerifyDate{
-    public String value() default "^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$";
-    public String message() default "Date is invalid(yyyy-mm-dd)";
+    public String value() default "^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$";
+    public String message() default "Date is invalid(dd-mm-yyyy)";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

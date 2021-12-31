@@ -1,14 +1,15 @@
 import { useSelector, useDispatch} from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {addBook} from "../../Redux/Actions.js"
+import {addBook, getBooks} from "../../Redux/Actions.js"
 import {FormGeneral} from "./AddBook.js"
 
 function AddBook() {
+  const dispatch = useDispatch()
   const [err, setErr] = useState("")
   const [book, setBook] = useState({
-    title:null,
-    author:null,
+    title:undefined,
+    author:undefined,
     price:undefined,
   })
   const [write, setWrite] = useState({
@@ -18,7 +19,7 @@ function AddBook() {
   })
 
   function setDate({day, month, year}){
-    return `${year}-${month}-${day}`
+    return `${day}-${month}-${year}`
   }
   async function handleSubmit(e){
     e.preventDefault();
@@ -27,6 +28,7 @@ function AddBook() {
       setErr(hola.message)
       return
     }
+    dispatch(getBooks())
     setErr("")
     setBook({
       title:null,
@@ -56,21 +58,22 @@ function handleChange(e){
       <Link to="/home">
         Back
       </Link>
+      <h3 style={{marginLeft:"0.5em", marginTop:"0.5em"}}>Add Book</h3>
       <FormGeneral onSubmit={(e)=>handleSubmit(e)}>
       <div>
         <label>Title:</label>
         <br/>
-        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.title} name="title" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
+        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.title?book.title:""} name="title" onChange={(e)=>handleChange(e)}/>
       </div>
       <div>
         <label>Author:</label>
         <br/>
-        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.author} name="author" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
+        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.author?book.author:""} name="author" onChange={(e)=>handleChange(e)}/>
       </div>
       <div>
         <label>Price:</label>
         <br/>
-        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.price} name="price" onChange={(e)=>handleChange(e)} placeholder="(only numbers)"/>
+        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.price?book.price:""} name="price" onChange={(e)=>handleChange(e)} placeholder="(only numbers)"/>
       </div>
       <div>
         <label>Write:</label>
@@ -79,7 +82,7 @@ function handleChange(e){
         <label style={{marginLeft:"0.3em"}}>Month:</label><input style={{width:"2em", textAlign: "center", marginLeft:"0.2em"}} value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} />
         <label style={{marginLeft:"0.3em"}}>Year:</label><input style={{width:"4em", textAlign: "center", marginLeft:"0.2em"}} value={write.year} name="wyear" onChange={(e)=>handleChange(e)} />
       </div>
-        <button>Add book</button>
+        <button style={{textDecoration:"none", color:"black", backgroundColor:"white", border:"solid", borderRadius:"1em", borderColor:"black"}}>Add book</button>
       </FormGeneral>
       <label>{err}</label>
     </>

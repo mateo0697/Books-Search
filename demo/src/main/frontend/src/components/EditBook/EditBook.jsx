@@ -23,7 +23,7 @@ function EditBook(props) {
   },[])
 
   function setDate({day, month, year}){
-    return `${year}-${month}-${day}`
+    return `${day}-${month}-${year}`
   }
 
   async function handleSubmit(e){
@@ -34,6 +34,7 @@ function EditBook(props) {
       setErr(hola.message)
       return
     }
+    dispatch(getBooks())
     setSubmit(true)
 }
 
@@ -58,6 +59,7 @@ function handleChange(e){
     <Link to="/home">
       Back
     </Link>
+    <h3 style={{marginLeft:"0.5em", marginTop:"0.5em"}}>Edit Book</h3>
     <FormGeneral onSubmit={(e)=>handleSubmit(e)}>
       <div>
         <label>Title:</label>
@@ -77,11 +79,11 @@ function handleChange(e){
       <div>
         <label>Publication date:</label>
           <br/>
-        <input style={{width:"2em", textAlign: "center"}} value={write.day} name="wday" onChange={(e)=>handleChange(e)} placeholder="Day(numbers)"/>
-        <input style={{width:"2em", textAlign: "center"}} value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} placeholder="Month"/>
-        <input style={{width:"4em", textAlign: "center"}} value={write.year} name="wyear" onChange={(e)=>handleChange(e)} placeholder="Year"/>
+          <label style={{marginLeft:"0.6em"}}>Day:</label><input style={{width:"2em", textAlign: "center", marginLeft:"0.2em"}} value={write.day} name="wday" onChange={(e)=>handleChange(e)} />
+          <label style={{marginLeft:"0.3em"}}>Month:</label><input style={{width:"2em", textAlign: "center", marginLeft:"0.2em"}} value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} />
+          <label style={{marginLeft:"0.3em"}}>Year:</label><input style={{width:"4em", textAlign: "center", marginLeft:"0.2em"}} value={write.year} name="wyear" onChange={(e)=>handleChange(e)} />
         </div>
-      <button>Edit book</button>
+      <button style={{textDecoration:"none", color:"black", backgroundColor:"white", border:"solid", borderRadius:"1em", borderColor:"black"}}>Edit book</button>
       <div>{err}</div>
     </FormGeneral>
     </>
