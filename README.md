@@ -2,7 +2,7 @@
 
 ## Iniciar el proyecto
 
-#### Instalaciones Obligatorias
+### Instalaciones Obligatorias
 
 Java version 17 https://www.oracle.com/java/technologies/downloads/ and https://www.java.com/es/download/ie_manual.jsp
 
