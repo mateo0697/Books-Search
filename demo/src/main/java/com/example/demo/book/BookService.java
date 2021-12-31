@@ -108,7 +108,7 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         }
         boolean exists = bookRepository.existsById(id);
         if (!exists){
-            return new ToFront("Book with id" + id + "does not exist", false);
+            return new ToFront("Book with id " + id + " does not exist", false);
         }
         //}
         bookRepository.deleteById(id);
