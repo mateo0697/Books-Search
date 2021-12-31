@@ -1,8 +1,8 @@
 # Books-Search
 
-##Iniciar el proyecto
+## Iniciar el proyecto
 
-####Instalaciones Obligatorias
+#### Instalaciones Obligatorias
 
 Java version 17 https://www.oracle.com/java/technologies/downloads/ and https://www.java.com/es/download/ie_manual.jsp
 
@@ -12,11 +12,11 @@ Node.Js https://nodejs.org/es/
 
 Postgresql https://www.postgresql.org/download/
 
-###Pasos a seguir
+### Pasos a seguir
 
 Clonar el repositorio de github
 
-####Back-end
+#### Back-end
 
 Entrar a la carpeto Book-Search
 
@@ -26,7 +26,7 @@ Una vez adentro abrir consola sobre esa carpeta, escribir mvn spring-boot:run y 
 
 Ya esta funcionando todo el Back-end
 
-####Front-end
+#### Front-end
 
 Entrar en la carpeta Book-Search
 
