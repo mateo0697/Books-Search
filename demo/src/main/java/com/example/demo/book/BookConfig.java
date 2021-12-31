@@ -15,18 +15,18 @@ public class BookConfig {
     CommandLineRunner commandLineRunner(BookRepository repository){
         return args -> {
             Book first = new Book(
-                    "The Crack",
+                    "Book 1",
                     "Mateo Paluci",
-                    "100",
+                    "150",
                     "2008-3-12"
 
             );
 
             Book second = new Book(
-                    "GOD",
-                    "Coscu",
-                    "100",
-                    "2008-3-12"
+                    "Book 2",
+                    "Sondeos",
+                    "200",
+                    "2034-5-23"
             );
             repository.saveAll(
                     List.of(first,second)
@@ -34,4 +34,3 @@ public class BookConfig {
         };
     }
 }
-
