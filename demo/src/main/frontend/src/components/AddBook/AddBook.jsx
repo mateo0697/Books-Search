@@ -2,11 +2,13 @@ import { useSelector, useDispatch} from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {addBook} from "../../Redux/Actions.js"
+import {FormGeneral} from "./AddBook.js"
+
 function AddBook() {
   const [err, setErr] = useState("")
   const [book, setBook] = useState({
-    title:"",
-    author:"",
+    title:null,
+    author:null,
     price:undefined,
   })
   const [write, setWrite] = useState({
@@ -27,9 +29,9 @@ function AddBook() {
     }
     setErr("")
     setBook({
-      title:"",
-      author:"",
-      price:0,
+      title:null,
+      author:null,
+      price:undefined,
     })
     setWrite({
       day:"",
@@ -54,27 +56,31 @@ function handleChange(e){
       <Link to="/home">
         Back
       </Link>
-      <form onSubmit={(e)=>handleSubmit(e)}>
+      <FormGeneral onSubmit={(e)=>handleSubmit(e)}>
+      <div>
         <label>Title:</label>
-        <input value={book.title} name="title" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
         <br/>
+        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.title} name="title" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
+      </div>
+      <div>
         <label>Author:</label>
-        <input value={book.author} name="author" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
         <br/>
+        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.author} name="author" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
+      </div>
+      <div>
         <label>Price:</label>
-        <input value={book.price} name="price" onChange={(e)=>handleChange(e)} placeholder="(only numbers)"/>
         <br/>
-        <div>
+        <input style={{marginLeft:"0.6em", marginTop:"0.2em"}} value={book.price} name="price" onChange={(e)=>handleChange(e)} placeholder="(only numbers)"/>
+      </div>
+      <div>
         <label>Write:</label>
-          {/*<label>Day:</label>*/}
-            <input value={write.day} name="wday" onChange={(e)=>handleChange(e)} placeholder="Day(numbers)"/>
-          {/*<label>Month:</label>*/}
-            <input value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} placeholder="Month"/>
-          {/*<label>Year:</label>*/}
-            <input value={write.year} name="wyear" onChange={(e)=>handleChange(e)} placeholder="Year"/>
-        </div>
+        <br/>
+        <label style={{marginLeft:"0.6em"}}>Day:</label><input style={{width:"2em", textAlign: "center", marginLeft:"0.2em"}} value={write.day} name="wday" onChange={(e)=>handleChange(e)} />
+        <label style={{marginLeft:"0.3em"}}>Month:</label><input style={{width:"2em", textAlign: "center", marginLeft:"0.2em"}} value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} />
+        <label style={{marginLeft:"0.3em"}}>Year:</label><input style={{width:"4em", textAlign: "center", marginLeft:"0.2em"}} value={write.year} name="wyear" onChange={(e)=>handleChange(e)} />
+      </div>
         <button>Add book</button>
-      </form>
+      </FormGeneral>
       <label>{err}</label>
     </>
   );

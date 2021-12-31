@@ -1,7 +1,16 @@
 package com.example.demo.book;
 
+import com.example.demo.book.Validations.IsNumber;
+import com.example.demo.book.Validations.VerifyDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.lang.Integer;
 
 @Entity
 @Table
@@ -18,10 +27,17 @@ public class Book {
             generator = "book_sequence"
     )
     private Long id;
+
+    @Size(min = 1, message = "Title cant be empty") //Valido que el titulo sea de 1 o mas caracteres
     private String title;
-    private String author;
-    private Integer price;
-    private String write;
+
+    private String author;//no tiene validaciones
+
+    @IsNumber
+    private String price;//Valido que solo sean numeros
+
+    @VerifyDate
+    private String write;//Verifico que la fecha sea valida y que tenga formato (yyyy-mm-dd)
 
     public Book() {
     }
@@ -29,7 +45,7 @@ public class Book {
     public Book(Long id,
                 String title,
                 String author,
-                Integer price,
+                String price,
                 String write) {
         this.id = id;
         this.title = title;
@@ -40,7 +56,7 @@ public class Book {
 
     public Book(String title,
                 String author,
-                Integer price,
+                String price,
                 String write) {
         this.title = title;
         this.author = author;
@@ -72,11 +88,11 @@ public class Book {
         this.author = author;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

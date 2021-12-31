@@ -2,6 +2,7 @@ import { useSelector, useDispatch} from "react-redux";
 import { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import {getBooks, editBook, addBook} from "../../Redux/Actions.js"
+import {FormGeneral} from "./EditBook.js"
 
 function EditBook(props) {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ function EditBook(props) {
   }
 
   async function handleSubmit(e){
+    console.log(editedBook)
     e.preventDefault();
     let hola = await editBook({...editedBook, write:setDate(write)})
     if (!hola.state) {
@@ -42,6 +44,11 @@ function handleChange(e){
       setWrite(old => ({...old, [prop.slice(1)]:texto}))
       return
     }
+    console.log("" === texto)
+    if (texto === "") {
+      setEditedBook(old => ({...old, [prop]: null}))
+      return
+    }
     setEditedBook(old => ({...old, [prop]: texto}))
     setErr("")
     }
@@ -51,28 +58,32 @@ function handleChange(e){
     <Link to="/home">
       Back
     </Link>
-    <form onSubmit={(e)=>handleSubmit(e)}>
-      <label>Title:</label>
-      <input value={editedBook.title} name="title" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
-      <br/>
-      <label>Author:</label>
-      <input value={editedBook.author} name="author" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
-      <br/>
-      <label>Price:</label>
-      <input value={editedBook.price} name="price" onChange={(e)=>handleChange(e)} placeholder="(only numbers)"/>
-      <br/>
+    <FormGeneral onSubmit={(e)=>handleSubmit(e)}>
       <div>
-      <label>Write:</label>
-        {/*<label>Day:</label>*/}
-          <input value={write.day} name="wday" onChange={(e)=>handleChange(e)} placeholder="Day(numbers)"/>
-        {/*<label>Month:</label>*/}
-          <input value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} placeholder="Month"/>
-        {/*<label>Year:</label>*/}
-          <input value={write.year} name="wyear" onChange={(e)=>handleChange(e)} placeholder="Year"/>
+        <label>Title:</label>
+          <br/>
+        <input value={editedBook.title} name="title" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
       </div>
+      <div>
+        <label>Author:</label>
+          <br/>
+        <input value={editedBook.author} name="author" onChange={(e)=>handleChange(e)} placeholder="(only leters)"/>
+      </div>
+      <div>
+        <label>Price:</label>
+          <br/>
+        <input value={editedBook.price} name="price" onChange={(e)=>handleChange(e)} placeholder="(only numbers)"/>
+      </div>
+      <div>
+        <label>Publication date:</label>
+          <br/>
+        <input style={{width:"2em", textAlign: "center"}} value={write.day} name="wday" onChange={(e)=>handleChange(e)} placeholder="Day(numbers)"/>
+        <input style={{width:"2em", textAlign: "center"}} value={write.month} name="wmonth" onChange={(e)=>handleChange(e)} placeholder="Month"/>
+        <input style={{width:"4em", textAlign: "center"}} value={write.year} name="wyear" onChange={(e)=>handleChange(e)} placeholder="Year"/>
+        </div>
       <button>Edit book</button>
       <div>{err}</div>
-    </form>
+    </FormGeneral>
     </>
   );
 }

@@ -3,10 +3,11 @@ import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import LandingPage from "./components/LandingPage/LandingPage"
-import Home from "./components/Home/Home"
-import AddBook from "./components/AddBook/AddBook"
-import EditBook from "./components/EditBook/EditBook"
+import LandingPage from "./components/LandingPage/LandingPage.jsx"
+import Home from "./components/Home/Home.jsx"
+import AddBook from "./components/AddBook/AddBook.jsx"
+import EditBook from "./components/EditBook/EditBook.jsx"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

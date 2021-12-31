@@ -3,7 +3,6 @@ package com.example.demo.book.ToFront;
 public class ToFront {
     private String message;
     private Boolean state;
-
     public ToFront(String message, Boolean state) {
         this.message = message;
         this.state = state;

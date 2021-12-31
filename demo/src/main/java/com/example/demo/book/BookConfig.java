@@ -17,7 +17,7 @@ public class BookConfig {
             Book first = new Book(
                     "The Crack",
                     "Mateo Paluci",
-                    100,
+                    "100",
                     "2008-3-12"
 
             );
@@ -25,7 +25,7 @@ public class BookConfig {
             Book second = new Book(
                     "GOD",
                     "Coscu",
-                    100,
+                    "100",
                     "2008-3-12"
             );
             repository.saveAll(
