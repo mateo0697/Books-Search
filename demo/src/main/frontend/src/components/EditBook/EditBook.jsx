@@ -16,10 +16,15 @@ function EditBook(props) {
     year:""
   })
   useEffect(async ()=>{
-    let b = await dispatch(getBooks({id:props.match.params.id, string:"book"}))
-    setEditedBook(b.payload[0])
-    let date = b.payload[0].write.split("-")
-    setWrite({day:date[2], month:date[1], year:date[0]})
+    let devolution = await dispatch(getBooks({id:props.match.params.id, string:"book"}))
+    if (devolution.payload.state) {
+      setEditedBook(devolution.payload.books[0])
+      let date = devolution.payload.books[0].write.split("-")
+      setWrite({day:date[2], month:date[1], year:date[0]})
+    }else {
+      setErr(devolution.payload.message)
+    }
+
   },[])
 
   function setDate({day, month, year}){
@@ -27,11 +32,10 @@ function EditBook(props) {
   }
 
   async function handleSubmit(e){
-    console.log(editedBook)
     e.preventDefault();
-    let hola = await editBook({...editedBook, write:setDate(write)})
-    if (!hola.state) {
-      setErr(hola.message)
+    let devolution = await editBook({...editedBook, write:setDate(write)})
+    if (!devolution.state) {
+      setErr(devolution.message)
       return
     }
     dispatch(getBooks())
@@ -45,7 +49,6 @@ function handleChange(e){
       setWrite(old => ({...old, [prop.slice(1)]:texto}))
       return
     }
-    console.log("" === texto)
     if (texto === "") {
       setEditedBook(old => ({...old, [prop]: null}))
       return
@@ -56,7 +59,7 @@ function handleChange(e){
 
   return submit?<Redirect to="/home"/> : (
     <>
-    <Link to="/home">
+    <Link to="/home" style={{textDecoration:"none", color:"black"}}>
       Back
     </Link>
     <h3 style={{marginLeft:"0.5em", marginTop:"0.5em"}}>Edit Book</h3>

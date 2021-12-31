@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export function getBooks(info = {id:"", string:"books"}){
+  console.log(info)
   return function (dispatch){
     return(
       axios.get(`http://localhost:8080/?id=${info.id}`)

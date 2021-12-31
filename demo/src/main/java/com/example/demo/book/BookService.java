@@ -20,20 +20,33 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> getBooks(Long id){
-        //1) Cuando llaman al metodo GET quiero que primero verifique si se fue dada una id, ya que en ese caso se busca un libro
-        //en específico.
-        //2)En caso de no haber un id busca todos los libros en la base de datos y la devuelve.
+    public ToFront getBooks(Long id, String title){
+        //1) Cuando llaman al metodo GET quiero que primero verifique si se fue dada una id o un titulo, ya que en ese
+        // caso se busca un libro en específico.
+
+        //2)En caso de no haber ninguno de estos busca todos los libros en la base de datos y la devuelve.
 
         //1)
         if (id != null){
-            Book one = bookRepository.findById(id).orElseThrow(()-> new IllegalStateException("This Id doesnt exist"));
+            Optional<Book> one = bookRepository.findById(id);
+            if (one.isEmpty()){
+                return new ToFront("This Id doesnt exist", false);
+            }
             List<Book> list = new ArrayList<>();
-            list.add(one);
-            return list;
+            list.add(one.get());
+            return new ToFront("These is the book with id " + id, true, list);
+        }
+        if (title!=null && title != ""){
+            Optional<Book> one = bookRepository.findBookByTitle(title);
+            if (one.isEmpty()){
+                return new ToFront("This Title doesnt exist", false);
+            }
+            List<Book> list = new ArrayList<>();
+            list.add(one.get());
+            return new ToFront("These is the book with id " + id, true, list);
         }
         //2)
-        return bookRepository.findAll();
+        return new ToFront("These are all the books", true,bookRepository.findAll());
     }
 
     public ToFront addNewBook(Book book){
@@ -46,42 +59,43 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         //3) Por último determino que si no hay un author o price dado por el usuario se ponga por default author:"Anonymous"
         // y price:0.
 
-        Long id = book.getId();
-        String title = book.getTitle();
-        //1){
-        if (title == null){
-            return new ToFront("Insert Title", false);
-        }
-
-        if (book.getWrite() == null){
-            return new ToFront("Insert date of publishing", false);
-        }
-        //}
-        //2){
-        if (id != null){
-            Optional<Book> bookById = bookRepository.findById(id);
-            if (bookById.isPresent()){
-                return new ToFront("Id already exist", false);
+            Long id = book.getId();
+            String title = book.getTitle();
+            //1){
+            if (title == null){
+                return new ToFront("Insert Title", false);
             }
-        }
 
-        Optional<Book> bookByTitle = bookRepository.findBookByTitle(title);
-        if (bookByTitle.isPresent()) {
-            return new ToFront("Book already exist", false);
-        }
-        //}
-        //3){
-        if (book.getAuthor()==null || Objects.equals(book.getAuthor(), "")){
-            book.setAuthor("Anonymous");
-        }
+            if (book.getWrite() == null){
+                return new ToFront("Insert date of publishing", false);
+            }
+            //}
+            //2){
+            if (id != null){
+                Optional<Book> bookById = bookRepository.findById(id);
+                if (bookById.isPresent()){
+                    return new ToFront("Id already exist", false);
+                }
+            }
 
-        if (book.getPrice()==null || Objects.equals(book.getPrice(), "")){
-            book.setPrice("0");
-        }
-        //}
-        bookRepository.save(book);
+            Optional<Book> bookByTitle = bookRepository.findBookByTitle(title);
+            if (bookByTitle.isPresent()) {
+                return new ToFront("Book already exist", false);
+            }
+            //}
+            //3){
+            if (book.getAuthor()==null || Objects.equals(book.getAuthor(), "")){
+                book.setAuthor("Anonymous");
+            }
 
-        return new ToFront("Added successfully", true);
+            if (book.getPrice()==null || Objects.equals(book.getPrice(), "")){
+                book.setPrice("0");
+            }
+            //}
+            bookRepository.save(book);
+            List<Book> list = new ArrayList<>();
+            list.add(book);
+            return new ToFront("Added successfully", true, list);
 
     }
 
@@ -94,7 +108,7 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         }
         boolean exists = bookRepository.existsById(id);
         if (!exists){
-            return new ToFront("Book with id " + id + " does not exist", false);
+            return new ToFront("Book with id" + id + "does not exist", false);
         }
         //}
         bookRepository.deleteById(id);
@@ -102,23 +116,20 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
     }
 
     @Transactional//Me permite utilizar book1.get().setETC que modifica los valores directamente en la base de datos.
-    public ToFront putBook(Book book){
+    public ToFront putBook(Book newbook){
         //1) Cuando llaman al metodo PUT primero verifico que la id dada sea correcta al igual que el nuevo título no este
         // en usada otro libro.
 
         //2) Una vez terminado, cambio los valores del libro guardado en la base de datos por los brindados por el usuario.
-        System.out.println(book);
-        Long id = book.getId();
-        String title = book.getTitle();
-        String author = book.getAuthor();
-        String price = book.getPrice();
-        String write = book.getWrite();
+        System.out.println(newbook);
+        Long id = newbook.getId();
+        String title = newbook.getTitle();
+        String author = newbook.getAuthor();
+        String price = newbook.getPrice();
+        String write = newbook.getWrite();
         //1){
-        if(id == null){
-            return new ToFront("Id needed", false);
-        }
-        Optional <Book> book1 = bookRepository.findById(id);
-        if(book1.isEmpty()){
+        Optional <Book> book = bookRepository.findById(id);
+        if(book.isEmpty()){
             return new ToFront("This id does not exist",false);
         }
 
@@ -129,11 +140,13 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         }
         //}
         //2){
-        if (title != null){book1.get().setTitle(title);}
-        if (author != null){book1.get().setAuthor(author);}
-        if (price != null){book1.get().setPrice(price);}
-        if (write != null){book1.get().setWrite(write);}
+        if (title != null){book.get().setTitle(title);}else{newbook.setTitle(book.get().getTitle());}
+        if (author != null){book.get().setAuthor(author);}else{newbook.setAuthor(book.get().getAuthor());}
+        if (price != null){book.get().setPrice(price);}else{newbook.setPrice(book.get().getPrice());}
+        if (write != null){book.get().setWrite(write);}else{newbook.setWrite(book.get().getWrite());}
         //}
-        return new ToFront("Edited successfully", true);
+        List<Book> list = new ArrayList<>();
+        list.add(newbook);
+        return new ToFront("Edited successfully", true, list);
     }
 }

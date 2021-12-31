@@ -26,8 +26,9 @@ public class BookController {
     }
 
     @GetMapping//recibe los get al path
-    public List<Book> getBooks(@RequestParam(required = false) Long id){
-        return bookService.getBooks(id);
+    public ToFront getBooks(@RequestParam(required = false) Long id,
+    @RequestParam(required = false) String title){
+        return bookService.getBooks(id, title);
     }
 
     @PostMapping//recibe los post al path

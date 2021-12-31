@@ -7,6 +7,7 @@ import {DivHome, DivBooks, DivButtons} from "./Home.js"
 function Home() {
   const prueba = useSelector(store=>store.books)
   const dispatch = useDispatch()
+
   useEffect(()=>{
       dispatch(getBooks());
   },[])
@@ -18,7 +19,7 @@ function Home() {
 
   return (
     <>
-    <Link to="/addbook">Add New Book</Link>
+    <Link to="/addbook" style={{textDecoration:"none", color:"black"}}>Add New Book</Link>
     <DivHome>
       {prueba.map(book => {
            return (

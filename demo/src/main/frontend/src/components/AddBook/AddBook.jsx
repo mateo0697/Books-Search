@@ -23,13 +23,13 @@ function AddBook() {
   }
   async function handleSubmit(e){
     e.preventDefault();
-    let hola = await addBook({...book, write:setDate(write)})
-    if (!hola.state) {
-      setErr(hola.message)
+    let devolution = await addBook({...book, write:setDate(write)})
+    if (!devolution.state) {
+      setErr(devolution.message)
       return
     }
     dispatch(getBooks())
-    setErr("")
+    setErr(devolution.message)
     setBook({
       title:null,
       author:null,
@@ -55,7 +55,7 @@ function handleChange(e){
 
   return (
     <>
-      <Link to="/home">
+      <Link to="/home" style={{textDecoration:"none", color:"black"}}>
         Back
       </Link>
       <h3 style={{marginLeft:"0.5em", marginTop:"0.5em"}}>Add Book</h3>

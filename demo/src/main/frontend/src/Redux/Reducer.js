@@ -7,7 +7,8 @@ const initialState = {
 const todos = (state = initialState, action) => {
   switch (action.type) {
     case "GET_BOOKS":
-      return ({...state, [action.where]:action.payload})
+      console.log(action)
+      return ({...state, [action.where]:action.payload.books})
 
     default:
       return state
