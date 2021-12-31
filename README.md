@@ -5,13 +5,16 @@
 ####Instalaciones Obligatorias:
 
 Java version 17 https://www.oracle.com/java/technologies/downloads/ and https://www.java.com/es/download/ie_manual.jsp
+
 Apache Maven 3.8.4 https://maven.apache.org/download.cgi
+
 Node.Js https://nodejs.org/es/
+
 Postgresql https://www.postgresql.org/download/
 
 ###Pasos a seguir:
 
-1) Clonar el repositorio de github
+Clonar el repositorio de github
 
 ####Back-end:
 
