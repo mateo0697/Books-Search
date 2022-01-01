@@ -66,11 +66,11 @@ Body:{
 
   title:
 
-  price:
+  price: (only numbers)
 
   author:
 
-  write:
+  write: (dd-mm-yyyy)
 
 }
 
@@ -92,12 +92,12 @@ Body:{
 
   title:
 
-  price:
+  price: (only numbers)
 
   author:
 
-  write:
-  
+  write: (dd-mm-yyyy)
+
 }
 
 Cualquier dato puede estar en nulo menos el id.
