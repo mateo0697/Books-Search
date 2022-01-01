@@ -27,6 +27,24 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         //2)En caso de no haber ninguno de estos busca todos los libros en la base de datos y la devuelve.
 
         //1)
+        if(id!=null && title!=null){
+            Optional<Book> biId = bookRepository.findById(id);
+            Optional<Book> biTitle = bookRepository.findBookByTitle(title);
+            List<Book> list = new ArrayList<>();
+            if(biId.isEmpty() && biTitle.isEmpty()){
+                return new ToFront("These id "+id+" and title "+title+" does not exist", false);
+            }else if(biId.isEmpty()){
+                list.add(biTitle.get());
+                return new ToFront("This is the book with title "+ title + " and this id "+id+" does not exist", true, list);
+            }else if(biTitle.isEmpty()){
+                list.add(biId.get());
+                return new ToFront("This is the book with id "+ id + " and this title "+title+" does not exist", true, list);
+            }else{
+                list.add(biTitle.get());
+                list.add(biId.get());
+                return new ToFront("These are the books with title "+title+" and id "+id, true, list);
+            }
+        }
         if (id != null){
             Optional<Book> one = bookRepository.findById(id);
             if (one.isEmpty()){
