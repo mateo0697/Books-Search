@@ -63,10 +63,15 @@ En caso de que el titulo o id no sean validos se avisara al usuario.
 http://localhost:8080/
 
 Body:{
+
   title:
+
   price:
+
   author:
+
   write:
+
 }
 
 En caso que el price sea nulo se otorgara 0.
@@ -82,11 +87,17 @@ Se puede agregar un id especifico pero en caso de que ya exista se avisara al us
 http://localhost:8080/
 
 Body:{
+
   id:
+
   title:
+
   price:
+
   author:
+
   write:
+  
 }
 
 Cualquier dato puede estar en nulo menos el id.
