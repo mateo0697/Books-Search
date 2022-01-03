@@ -18,7 +18,7 @@ Clonar el repositorio de github
 
 #### Back-end
 
-Entrar a la carpeto Book-Search
+Entrar a la carpeta Book-Search
 
 Entrar a la carpeta demo
 
