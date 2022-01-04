@@ -46,6 +46,9 @@ function handleChange(e){
     const prop = e.target.name
     const texto =  e.target.value
     if (prop[0] === "w") {
+      if (((prop.slice(1) === "day" || prop.slice(1) === "month") && texto.length >2) || (prop.slice(1) === "year" && texto.length >4)) {
+        return
+      }
       setWrite(old => ({...old, [prop.slice(1)]:texto}))
       return
     }
@@ -55,7 +58,7 @@ function handleChange(e){
 
   return (
     <>
-      <Link to="/home" style={{textDecoration:"none", color:"black"}}>
+      <Link to="/home" style={{textDecoration:"none", color:"black", marginLeft:"0.5em"}}>
         Back
       </Link>
       <h3 style={{marginLeft:"0.5em", marginTop:"0.5em"}}>Add Book</h3>

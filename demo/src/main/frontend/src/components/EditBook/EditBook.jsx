@@ -20,7 +20,7 @@ function EditBook(props) {
     if (devolution.payload.state) {
       setEditedBook(devolution.payload.books[0])
       let date = devolution.payload.books[0].write.split("-")
-      setWrite({day:date[2], month:date[1], year:date[0]})
+      setWrite({day:date[0], month:date[1], year:date[2]})
     }else {
       setErr(devolution.payload.message)
     }
@@ -46,6 +46,9 @@ function handleChange(e){
     const prop = e.target.name
     const texto =  e.target.value
     if (prop[0] === "w") {
+      if (((prop.slice(1) === "day" || prop.slice(1) === "month") && texto.length >2) || (prop.slice(1) === "year" && texto.length >4)) {
+        return
+      }
       setWrite(old => ({...old, [prop.slice(1)]:texto}))
       return
     }
@@ -59,7 +62,7 @@ function handleChange(e){
 
   return submit?<Redirect to="/home"/> : (
     <>
-    <Link to="/home" style={{textDecoration:"none", color:"black"}}>
+    <Link to="/home" style={{textDecoration:"none", color:"black", marginLeft:"0.5em"}}>
       Back
     </Link>
     <h3 style={{marginLeft:"0.5em", marginTop:"0.5em"}}>Edit Book</h3>

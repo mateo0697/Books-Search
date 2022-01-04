@@ -19,7 +19,7 @@ function Home() {
 
   return (
     <>
-    <Link to="/addbook" style={{textDecoration:"none", color:"black"}}>Add New Book</Link>
+    <Link to="/addbook" style={{textDecoration:"none", color:"black", marginLeft:"0.5em"}}>Add New Book</Link>
     <DivHome>
       {prueba.map(book => {
            return (
@@ -32,7 +32,7 @@ function Home() {
                 <div>Title: {book.title}</div>
                 <div>Author: {book.author}</div>
                 <div>Price: {book.price}</div>
-                <div>Date of Publication: {book.write}</div>
+                <div>Date of Publication: <br/>{book.write}</div>
               </div>
              </DivBooks>
            )

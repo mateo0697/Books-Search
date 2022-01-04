@@ -158,10 +158,26 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         }
         //}
         //2){
-        if (title != null){book.get().setTitle(title);}else{newbook.setTitle(book.get().getTitle());}
-        if (author != null){book.get().setAuthor(author);}else{newbook.setAuthor(book.get().getAuthor());}
-        if (price != null){book.get().setPrice(price);}else{newbook.setPrice(book.get().getPrice());}
-        if (write != null){book.get().setWrite(write);}else{newbook.setWrite(book.get().getWrite());}
+        if (title != null){
+          book.get().setTitle(title);
+        }else{
+          newbook.setTitle(book.get().getTitle());
+        }
+        if (author != null){
+          book.get().setAuthor(author);
+        }else{
+          newbook.setAuthor(book.get().getAuthor());
+        }
+        if (price != null){
+          book.get().setPrice(price);
+        }else{
+          newbook.setPrice(book.get().getPrice());
+        }
+        if (write != null){
+          book.get().setWrite(write);
+        }else{
+          newbook.setWrite(book.get().getWrite());
+        }
         //}
         List<Book> list = new ArrayList<>();
         list.add(newbook);
