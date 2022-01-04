@@ -37,7 +37,7 @@ public class Book {
     private String price;//Valido que solo sean numeros
 
     @VerifyDate
-    private String write;//Verifico que la fecha sea valida y que tenga formato (yyyy-mm-dd)
+    private String write;//Verifico que la fecha sea valida y que tenga formato (dd-mm-yyyy)
 
     public Book() {
     }

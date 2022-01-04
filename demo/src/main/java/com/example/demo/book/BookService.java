@@ -27,7 +27,7 @@ public class BookService {//aca voy a delcarar que se hace cuando se llaman a di
         //2)En caso de no haber ninguno de estos busca todos los libros en la base de datos y la devuelve.
 
         //1)
-        if(id!=null && title!=null){
+        if(id!=null && title!=null && title != ""){
             Optional<Book> biId = bookRepository.findById(id);
             Optional<Book> biTitle = bookRepository.findBookByTitle(title);
             List<Book> list = new ArrayList<>();
