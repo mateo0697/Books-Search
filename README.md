@@ -18,13 +18,15 @@ Clonar el repositorio de github
 
 #### Back-end
 
-Entrar a la carpeto Book-Search
+Entrar a la carpeta Book-Search
 
 Entrar a la carpeta demo
 
 Una vez adentro abrir consola sobre esa carpeta, escribir mvn spring-boot:run y hacer enter
 
 Ya esta funcionando todo el Back-end
+
+Cuando se inicia se crean por defecto 2 libros, si no se quiere esto vaya al archivo en BookSearch/demo/src/main/java/com/example/demo/book/BookConfig.java y borre todo el codigo desde la linea 14 inclusive hasta la 35(Desde @Bean, hasta el cierre de llaves de CommandLineRunner)
 
 #### Front-end
 
