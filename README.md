@@ -74,15 +74,15 @@ Si no existen libros con esas características se avisara al usuario.
 
 ###### Ordenamiento(acepta solo un valor):
 
-?sort=author / ?sort=write / ?sort=price : ordena los libro según el parámetro elegido. Por default lo ordena ascendentemente, si se quiere cambiar agregar un - después del =
+?sort=author / ?sort=write / ?sort=price : ordena los libro según el parámetro elegido. Por default lo ordena ascendentemente/menor a mayor, si se quiere cambiar agregar un - después del =
 
 Si no se otorga un sort se devolverán ordenados de la misma forma en la que fueron creados.
 
 ###### Paginación:
 
-?page= : la pagina que queremos seleccionar
+?page=(only numbers) : la pagina que queremos seleccionar
 
-?eachPage= : la cantidad de libro por página
+?eachPage=(only numbers) : la cantidad de libro por página
 
 Si page o eachPage es nulo se devolverán todos los libro.
 
