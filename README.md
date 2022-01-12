@@ -60,7 +60,9 @@ http://localhost:8080/books/ -> devuelve todos los libro.
 
 En caso de que el título o id no sean válidos se avisara al usuario.
 
-##### Querys combinables posibles(solo se pueden uno de cada tipo a la vez):
+##### Querys combinables posibles:
+
+###### Filtrado:
 
 ?author= : devuelve todos los libro de ese autor
 
@@ -70,13 +72,17 @@ En caso de que el título o id no sean válidos se avisara al usuario.
 
 Si no existen libros con esas características se avisara al usuario.
 
-?sort=author / ?sort=write / ?sort=price : ordena los libro según el parámetro elegido. Por default lo ordena ascendentemente, si se quiere cambiar agregar un - después del =
+###### Ordenamiento(acepta solo un valor):
+
+?sort=author / ?sort=write / ?sort=price : ordena los libro según el parámetro elegido. Por default lo ordena ascendentemente/menor a mayor, si se quiere cambiar agregar un - después del =
 
 Si no se otorga un sort se devolverán ordenados de la misma forma en la que fueron creados.
 
-?page= : la pagina que queremos seleccionar
+###### Paginación:
 
-?eachPage= : la cantidad de libro por página
+?page=(only numbers) : la pagina que queremos seleccionar
+
+?eachPage=(only numbers) : la cantidad de libro por página
 
 Si page o eachPage es nulo se devolverán todos los libro.
 
