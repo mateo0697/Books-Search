@@ -4,7 +4,7 @@
 
 ### Instalaciones Obligatorias
 
-Java version 17 https://www.oracle.com/java/technologies/downloads/ and https://www.java.com/es/download/ie_manual.jsp
+Java versión 17 https://www.oracle.com/java/technologies/downloads/ and https://www.java.com/es/download/ie_manual.jsp
 
 Apache Maven 3.8.4 https://maven.apache.org/download.cgi
 
@@ -24,9 +24,9 @@ Entrar a la carpeta demo
 
 Una vez adentro abrir consola sobre esa carpeta, escribir mvn spring-boot:run y hacer enter
 
-Ya esta funcionando todo el Back-end
+Ya está funcionando todo el Back-end
 
-Cuando se inicia se crean por defecto 2 libros, si no se quiere esto vaya al archivo en BookSearch/demo/src/main/java/com/example/demo/book/BookConfig.java y borre todo el codigo desde la linea 14 inclusive hasta la 35(Desde @Bean, hasta el cierre de llaves de CommandLineRunner)
+Cuando se inicia se crean por defecto 2 libros, si no se quiere esto vaya al archivo en BookSearch/demo/src/main/java/com/example/demo/book/BookConfig.java y borre todo el codigo desde la línea 14 inclusive hasta la 35(Desde @Bean, hasta el cierre de llaves de CommandLineRunner)
 
 #### Front-end
 
@@ -44,25 +44,46 @@ Una vez dentro abrir la consola sobre esta carpeta, escribir npm install y dar e
 
 Una vez terminado de ejecutarse escribir npm start
 
-Ya esta funcionando todo el Front-end
+Ya está funcionando todo el Front-end
 
 ### Metodos HTTP:
 
 #### GET:
 
-http://localhost:8080/ -> devuelve todos los libro.
+http://localhost:8080/books/ -> devuelve todos los libro.
 
-http://localhost:8080/?title= devuelve el libro con ese titulo.
+##### Querys únicos posibles(solo se aceptan uno de estos a la vez):
 
-http://localhost:8080/?id= devuelve el libro con ese id.
+?title= : devuelve el libro con ese título.
 
-http://localhost:8080/?title=&id= devuelve el libro con ese id y el libro con ese titulo.
+?id= : devuelve el libro con ese id.
 
-En caso de que el titulo o id no sean validos se avisara al usuario.
+En caso de que el título o id no sean válidos se avisara al usuario.
+
+##### Querys combinables posibles(solo se pueden uno de cada tipo a la vez):
+
+?author= : devuelve todos los libro de ese autor
+
+?price=> / ?price=< / ?price= : devuelve todos los libros con precios menores e iguales, mayores e iguales o solo iguales(El orden mostrados es el mismo explicado)
+
+?write=> / ?write=< / ?write= : devuelve todos los libros con fechas de publicación menores e iguales, mayores e iguales o solo iguales(El orden mostrados es el mismo explicado)
+
+Si no existen libros con esas características se avisara al usuario.
+
+?sort=author / ?sort=write / ?sort=price : ordena los libro según el parámetro elegido. Por default lo ordena ascendentemente, si se quiere cambiar agregar un - después del =
+
+Si no se otorga un sort se devolverán ordenados de la misma forma en la que fueron creados.
+
+?page= : la pagina que queremos seleccionar
+
+?eachPage= : la cantidad de libro por página
+
+Si page o eachPage es nulo se devolverán todos los libro.
+
 
 #### POST:
 
-http://localhost:8080/
+http://localhost:8080/books/
 
 Body:{
 
@@ -72,21 +93,21 @@ Body:{
 
   author:
 
-  write: (dd-mm-yyyy)
+  write: (yyyy-mm-dd)(esa cantidad de caracteres es requerida)
 
 }
 
-En caso que el price sea nulo se otorgara 0.
+En caso de que el price sea nulo se otorgara 0.
 
-En caso que el author sea nulo se otorgara Anonymous.
+En caso de que el author sea nulo se otorgara Anonymous.
 
-En caso de que write o title sean nulos se avisara al usuario y no se creara el libro.
+En caso de que write o title sean nulos se avisara al usuario y no se generara el libro.
 
-Se puede agregar un id especifico pero en caso de que ya exista se avisara al usuario y no se creara el libro.
+Se puede agregar un id específico, pero en caso de que ya exista se avisara al usuario y no se generara el libro.
 
 #### PUT:
 
-http://localhost:8080/
+http://localhost:8080/books/
 
 Body:{
 
@@ -98,16 +119,16 @@ Body:{
 
   author:
 
-  write: (dd-mm-yyyy)
+  write: (yyyy-mm-dd)(esa cantidad de caracteres es requerida)
 
 }
 
 Cualquier dato puede estar en nulo menos el id.
 
-Si el usuario quiere modificar solo el price no hace falta que ingrese todo los otros datos, pero si no agrega el id se le avisara y no se realizaran los cambios.
+Si el usuario quiere modificar solo el price no hace falta que ingrese todos los otros datos, pero si no agrega el id se le avisara y no se realizaran los cambios.
 
 #### DELETE:
 
-http://localhost:8080/id
+http://localhost:8080/books/id
 
-En caso de no agregar un id existente se le avisara al usuario.
+En caso de no agregar un id existente se le avisará al usuario.
