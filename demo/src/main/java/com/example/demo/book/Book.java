@@ -1,20 +1,14 @@
 package com.example.demo.book;
 
-import com.example.demo.book.Validations.IsNumber;
-import com.example.demo.book.Validations.VerifyDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.lang.Integer;
 
 @Entity
 @Table
-public class Book {
+public class Book implements Comparable<Book> {
 
     @Id
     @SequenceGenerator(
@@ -28,16 +22,15 @@ public class Book {
     )
     private Long id;
 
-    @Size(min = 1, message = "Title cant be empty") //Valido que el titulo sea de 1 o mas caracteres
+    @Size(min = 1, message = "Name cant be empty") //Valido que el titulo sea de 1 o mas caracteres
     private String title;
 
     private String author;//no tiene validaciones
 
-    @IsNumber
-    private String price;//Valido que solo sean numeros
+    private Integer price;//Valido que solo sean numeros
 
-    @VerifyDate
-    private String write;//Verifico que la fecha sea valida y que tenga formato (dd-mm-yyyy)
+    private LocalDate write;//Verifico que la fecha sea valida y que tenga formato (dd-mm-yyyy)
+
 
     public Book() {
     }
@@ -45,8 +38,8 @@ public class Book {
     public Book(Long id,
                 String title,
                 String author,
-                String price,
-                String write) {
+                Integer price,
+                LocalDate write) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -56,8 +49,8 @@ public class Book {
 
     public Book(String title,
                 String author,
-                String price,
-                String write) {
+                Integer price,
+                LocalDate write) {
         this.title = title;
         this.author = author;
         this.price = price;
@@ -88,19 +81,19 @@ public class Book {
         this.author = author;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public String getWrite() {
+    public LocalDate getWrite() {
         return write;
     }
 
-    public void setWrite(String write) {
+    public void setWrite(LocalDate write) {
         this.write = write;
     }
 
@@ -113,5 +106,10 @@ public class Book {
                 ", price=" + price +
                 ", write=" + write +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return title.compareTo(o.getTitle());
     }
 }
